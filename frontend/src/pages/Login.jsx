@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { FaEnvelope, FaLock } from "react-icons/fa";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -9,14 +10,7 @@ function Login() {
   const navigate = useNavigate();
 
   const handleLogin = async () => {
-    if (!email || !password) {
-      alert("Please enter email and password");
-      return;
-    }
-
     try {
-      localStorage.removeItem("token");
-
       const res = await axios.post(
         "https://civic-dashboard-vicc.onrender.com/login",
         {
@@ -43,53 +37,60 @@ function Login() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+    <div className="min-h-screen bg-gradient-to-br from-blue-700 via-cyan-500 to-green-500 flex items-center justify-center px-4">
 
-      <div className="bg-white p-8 rounded-xl shadow-lg w-96">
+      <div className="bg-white/20 backdrop-blur-lg border border-white/30 shadow-2xl rounded-3xl p-8 w-full max-w-md">
 
-        <h2 className="text-3xl font-bold text-center mb-6">
-          Login
-        </h2>
+        <h1 className="text-4xl font-bold text-center text-white mb-2">
+          Civic Dashboard
+        </h1>
 
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          onKeyDown={(e) =>
-            e.key === "Enter" && handleLogin()
-          }
-          className="w-full p-3 border rounded-lg mb-4"
-        />
+        <p className="text-center text-white mb-8">
+          Welcome Back
+        </p>
 
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          onKeyDown={(e) =>
-            e.key === "Enter" && handleLogin()
-          }
-          className="w-full p-3 border rounded-lg mb-4"
-        />
+        {/* Email */}
+        <div className="relative mb-4">
+          <FaEnvelope className="absolute top-4 left-4 text-gray-500" />
+
+          <input
+            type="email"
+            placeholder="Email Address"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="w-full pl-12 pr-4 py-3 rounded-xl bg-white text-black focus:outline-none"
+          />
+        </div>
+
+        {/* Password */}
+        <div className="relative mb-6">
+          <FaLock className="absolute top-4 left-4 text-gray-500" />
+
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className="w-full pl-12 pr-4 py-3 rounded-xl bg-white text-black focus:outline-none"
+          />
+        </div>
 
         <button
           onClick={handleLogin}
-          className="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700"
+          className="w-full py-3 rounded-xl bg-white text-blue-700 font-bold hover:scale-105 transition duration-300"
         >
           Login
         </button>
 
-        <p className="text-center mt-5">
-          Don't have an account?
+        <p className="text-center text-white mt-6">
+          Don't have an account?{" "}
+          <Link
+            to="/signup"
+            className="font-bold underline"
+          >
+            Sign Up
+          </Link>
         </p>
-
-        <button
-          onClick={() => navigate("/signup")}
-          className="w-full mt-2 bg-green-600 text-white py-3 rounded-lg hover:bg-green-700"
-        >
-          Create Account
-        </button>
 
       </div>
 
