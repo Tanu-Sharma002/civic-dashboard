@@ -18,7 +18,7 @@ function Login() {
       localStorage.removeItem("token");
 
       const res = await axios.post(
-        "http://localhost:5050/login",
+        "https://civic-dashboard-vicc.onrender.com/login",
         {
           email,
           password

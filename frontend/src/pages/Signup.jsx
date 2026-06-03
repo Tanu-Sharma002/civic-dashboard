@@ -21,7 +21,7 @@ function Signup() {
     try {
 
       const res = await axios.post(
-        "http://localhost:5050/signup",
+        "https://civic-dashboard-vicc.onrender.com/signup",
         form
       );
 

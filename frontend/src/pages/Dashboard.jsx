@@ -77,7 +77,7 @@ function Dashboard() {
             const token = localStorage.getItem("token");
 
             const res = await axios.get(
-                `http://localhost:5050/api/data?location=${location}`,
+                `https://civic-dashboard-vicc.onrender.com/api/data?location=${location}`,
                 {
                     headers: {
                         Authorization: `Bearer ${token}`
@@ -110,7 +110,7 @@ function Dashboard() {
                     const token = localStorage.getItem("token");
 
                     const res = await axios.get(
-                        `http://localhost:5050/api/data?location=${pos.coords.latitude},${pos.coords.longitude}`,
+                        `https://civic-dashboard-vicc.onrender.com/api/data?location=${pos.coords.latitude},${pos.coords.longitude}`,
                         {
                             headers: {
                                 Authorization: `Bearer ${token}`
