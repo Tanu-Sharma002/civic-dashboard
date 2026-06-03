@@ -47,17 +47,17 @@ app.post("/signup", async (req, res) => {
           await bcrypt.hash(password, 10);
 
         // Insert user
+        // Insert user
         db.query(
           "INSERT INTO users(name,email,password) VALUES (?,?,?)",
           [name, email, hashedPassword],
           (err, result) => {
-
             if (err) {
+              console.log("Signup Error:", err);
               return res.status(500).json({
-                error: "Signup failed"
+                error: err.message
               });
             }
-
             res.json({
               message: "User registered successfully"
             });
@@ -66,11 +66,8 @@ app.post("/signup", async (req, res) => {
         );
       }
     );
-
   } catch (err) {
-
     console.log(err);
-
     res.status(500).json({
       error: "Server error"
     });
